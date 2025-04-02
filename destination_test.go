@@ -1,16 +1,16 @@
-package connectorname_test
+package googledrive_test
 
 import (
 	"context"
 	"testing"
 
-	connectorname "github.com/conduitio/conduit-connector-connectorname"
 	"github.com/matryer/is"
+	googledrive "github.com/repository/conduit-connector-google-drive"
 )
 
 func TestTeardown_NoOpen(t *testing.T) {
 	is := is.New(t)
-	con := connectorname.NewDestination()
+	con := googledrive.NewDestination()
 	err := con.Teardown(context.Background())
 	is.NoErr(err)
 }

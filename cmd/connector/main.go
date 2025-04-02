@@ -1,10 +1,10 @@
 package main
 
 import (
-	connectorname "github.com/conduitio/conduit-connector-connectorname"
 	sdk "github.com/conduitio/conduit-connector-sdk"
+	googledrive "github.com/repository/conduit-connector-google-drive"
 )
 
 func main() {
-	sdk.Serve(connectorname.Connector)
+	sdk.Serve(googledrive.Connector)
 }

@@ -12,10 +12,50 @@ specification:
   author: Your Name
   source:
     parameters:
-      - name: global_config_param_name
-        description: |-
-          GlobalConfigParam is named global_config_param_name and needs to be
-          provided by the user.
+      - name: drive.clientCertUrl
+        description: Google Client Cert URL
+        type: string
+        default: ""
+        validations:
+          - type: required
+            value: ""
+      - name: drive.clientEmail
+        description: Google Client Email
+        type: string
+        default: ""
+        validations:
+          - type: required
+            value: ""
+      - name: drive.clientId
+        description: Google Client ID
+        type: string
+        default: ""
+        validations:
+          - type: required
+            value: ""
+      - name: drive.folderId
+        description: Folder to connect to
+        type: string
+        default: ""
+        validations:
+          - type: required
+            value: ""
+      - name: drive.privateKey
+        description: Google Private Key
+        type: string
+        default: ""
+        validations:
+          - type: required
+            value: ""
+      - name: drive.privateKeyId
+        description: Google Private Key ID
+        type: string
+        default: ""
+        validations:
+          - type: required
+            value: ""
+      - name: drive.projectId
+        description: Google Project ID
         type: string
         default: ""
         validations:
@@ -90,22 +130,55 @@ specification:
             value: avro
   destination:
     parameters:
-      - name: global_config_param_name
-        description: |-
-          GlobalConfigParam is named global_config_param_name and needs to be
-          provided by the user.
+      - name: drive.clientCertUrl
+        description: Google Client Cert URL
         type: string
         default: ""
         validations:
           - type: required
             value: ""
-      - name: destinationConfigParam
-        description: DestinationConfigParam must be either yes or no (defaults to yes).
+      - name: drive.clientEmail
+        description: Google Client Email
         type: string
-        default: "yes"
+        default: ""
         validations:
-          - type: inclusion
-            value: yes,no
+          - type: required
+            value: ""
+      - name: drive.clientId
+        description: Google Client ID
+        type: string
+        default: ""
+        validations:
+          - type: required
+            value: ""
+      - name: drive.folderId
+        description: Folder to connect to
+        type: string
+        default: ""
+        validations:
+          - type: required
+            value: ""
+      - name: drive.privateKey
+        description: Google Private Key
+        type: string
+        default: ""
+        validations:
+          - type: required
+            value: ""
+      - name: drive.privateKeyId
+        description: Google Private Key ID
+        type: string
+        default: ""
+        validations:
+          - type: required
+            value: ""
+      - name: drive.projectId
+        description: Google Project ID
+        type: string
+        default: ""
+        validations:
+          - type: required
+            value: ""
       - name: sdk.batch.delay
         description: Maximum delay before an incomplete batch is written to the destination.
         type: duration

@@ -4,7 +4,18 @@ package googledrive
 // destination. If you don't need shared parameters you can entirely remove this
 // file.
 type Config struct {
-	// GlobalConfigParam is named global_config_param_name and needs to be
-	// provided by the user.
-	GlobalConfigParam string `json:"global_config_param_name" validate:"required"`
+	// Google Project ID
+	DriveProjectID string `json:"drive.projectId" validate:"required"`
+	// Google Private Key ID
+	DrivePrivateKeyID string `json:"drive.privateKeyId" validate:"required"`
+	// Google Private Key
+	DrivePrivateKey string `json:"drive.privateKey" validate:"required"`
+	// Google Client Email
+	DriveClientEmail string `json:"drive.clientEmail" validate:"required"`
+	// Google Client ID
+	DriveClientID string `json:"drive.clientId" validate:"required"`
+	// Google Client Cert URL
+	DriveClientCertUrl string `json:"drive.clientCertUrl" validate:"required"`
+	// Folder to connect to
+	DriveFolderID string `json:"drive.folderId" validate:"required"`
 }

@@ -101,7 +101,7 @@ func (d *Destination) Teardown(_ context.Context) error {
 }
 
 func (d *Destination) BuildCredentials() ([]byte, error) {
-	var serviceAccountCredentials = map[string]interface{}{
+	serviceAccountCredentials := map[string]interface{}{
 		"type":                        "service_account",
 		"project_id":                  d.config.DriveProjectID,
 		"private_key_id":              d.config.DrivePrivateKeyID,

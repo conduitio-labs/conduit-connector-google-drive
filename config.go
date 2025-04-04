@@ -15,7 +15,7 @@ type Config struct {
 	// Google Client ID
 	DriveClientID string `json:"drive.clientId" validate:"required"`
 	// Google Client Cert URL
-	DriveClientCertUrl string `json:"drive.clientCertUrl" validate:"required"`
+	DriveClientCertURL string `json:"drive.clientCertUrl" validate:"required"`
 	// Folder to connect to
 	DriveFolderID string `json:"drive.folderId" validate:"required"`
 }

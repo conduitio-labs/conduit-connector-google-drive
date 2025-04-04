@@ -80,7 +80,7 @@ func (d *Destination) Write(ctx context.Context, r []opencdc.Record) (int, error
 		// Upload the file directly from the bytes buffer
 		uploadedFile, err := d.service.Files.Create(fileMetadata).Media(fileBuffer).Do()
 		if err != nil {
-			return successfulUploads, fmt.Errorf("unable to upload file: %v", err)
+			return successfulUploads, fmt.Errorf("unable to upload file: %w", err)
 		}
 
 		// Log the uploaded file's ID
@@ -111,8 +111,13 @@ func (d *Destination) BuildCredentials() ([]byte, error) {
 		"auth_uri":                    "https://accounts.google.com/o/oauth2/auth",
 		"token_uri":                   "https://oauth2.googleapis.com/token",
 		"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-		"client_x509_cert_url":        d.config.DriveClientCertUrl,
+		"client_x509_cert_url":        d.config.DriveClientCertURL,
 	}
 
-	return json.Marshal(serviceAccountCredentials)
+	bytes, err := json.Marshal(serviceAccountCredentials)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal credentials: %w", err)
+	}
+
+	return bytes, nil
 }

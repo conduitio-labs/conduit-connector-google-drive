@@ -3,7 +3,6 @@ package googledrive
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"fmt"
 
 	"github.com/conduitio/conduit-commons/opencdc"
@@ -43,7 +42,7 @@ func (d *Destination) Open(ctx context.Context) error {
 	// Open is called after Configure to signal the plugin it can prepare to
 	// start writing records. If needed, the plugin should open connections in
 	// this function.
-	creds, err := d.BuildCredentials()
+	creds, err := d.config.BuildCredentials()
 	if err != nil {
 		return fmt.Errorf("failed to build credentials: %w", err)
 	}
@@ -98,26 +97,4 @@ func (d *Destination) Teardown(_ context.Context) error {
 	// will be no more calls to any other function. After Teardown returns, the
 	// plugin should be ready for a graceful shutdown.
 	return nil
-}
-
-func (d *Destination) BuildCredentials() ([]byte, error) {
-	serviceAccountCredentials := map[string]interface{}{
-		"type":                        "service_account",
-		"project_id":                  d.config.DriveProjectID,
-		"private_key_id":              d.config.DrivePrivateKeyID,
-		"private_key":                 d.config.DrivePrivateKey,
-		"client_email":                d.config.DriveClientEmail,
-		"client_id":                   d.config.DriveClientID,
-		"auth_uri":                    "https://accounts.google.com/o/oauth2/auth",
-		"token_uri":                   "https://oauth2.googleapis.com/token",
-		"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-		"client_x509_cert_url":        d.config.DriveClientCertURL,
-	}
-
-	bytes, err := json.Marshal(serviceAccountCredentials)
-	if err != nil {
-		return nil, fmt.Errorf("failed to marshal credentials: %w", err)
-	}
-
-	return bytes, nil
 }

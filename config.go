@@ -9,19 +9,26 @@ import (
 // destination. If you don't need shared parameters you can entirely remove this
 // file.
 type Config struct {
-	// Google Project ID
+	// The Google Cloud project ID associated with the service account.
 	DriveProjectID string `json:"drive.projectId" validate:"required"`
-	// Google Private Key ID
+
+	// The ID of the private key used to authenticate the service account.
 	DrivePrivateKeyID string `json:"drive.privateKeyId" validate:"required"`
-	// Google Private Key
+
+	// The private key (PEM-encoded) used to sign service account requests.
 	DrivePrivateKey string `json:"drive.privateKey" validate:"required"`
-	// Google Client Email
+
+	// The email address of the service account (e.g. my-service-account@project.iam.gserviceaccount.com).
 	DriveClientEmail string `json:"drive.clientEmail" validate:"required"`
-	// Google Client ID
+
+	// The OAuth2 client ID associated with the service account.
 	DriveClientID string `json:"drive.clientId" validate:"required"`
-	// Google Client Cert URL
+
+	// The URL to the X.509 certificate for the service account, used to verify its identity.
 	DriveClientCertURL string `json:"drive.clientCertUrl" validate:"required"`
-	// Folder to connect to
+
+	// The ID of the Google Drive folder where records will be uploaded.
+	// This can be found in the folder's URL: https://drive.google.com/drive/folders/<folderId>
 	DriveFolderID string `json:"drive.folderId" validate:"required"`
 }
 

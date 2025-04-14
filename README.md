@@ -3,114 +3,35 @@
 [Conduit](https://conduit.io) connector for <!-- readmegen:name -->Google-Drive<!-- /readmegen:name -->.
 
 <!-- readmegen:description -->
-This is a detailed description of your connector.
-
-It can contain information about the features and limitations of the connector, usage instructions, etc.
-
-By default, it's inserted into the README file and Markdown syntax can be used.<!-- /readmegen:description -->
-
-## Source
-
-A source connector pulls data from an external resource and pushes it to
-downstream resources via Conduit.
-
-### Configuration
-
-<!-- readmegen:source.parameters.yaml -->
-```yaml
-version: 2.2
-pipelines:
-  - id: example
-    status: running
-    connectors:
-      - id: example
-        plugin: "google-drive"
-        settings:
-          # Google Client Cert URL
-          # Type: string
-          # Required: yes
-          drive.clientCertUrl: ""
-          # Google Client Email
-          # Type: string
-          # Required: yes
-          drive.clientEmail: ""
-          # Google Client ID
-          # Type: string
-          # Required: yes
-          drive.clientId: ""
-          # Folder to connect to
-          # Type: string
-          # Required: yes
-          drive.folderId: ""
-          # Google Private Key
-          # Type: string
-          # Required: yes
-          drive.privateKey: ""
-          # Google Private Key ID
-          # Type: string
-          # Required: yes
-          drive.privateKeyId: ""
-          # Google Project ID
-          # Type: string
-          # Required: yes
-          drive.projectId: ""
-          # SourceConfigParam must be provided by the user.
-          # Type: string
-          # Required: yes
-          sourceConfigParam: ""
-          # Maximum delay before an incomplete batch is read from the source.
-          # Type: duration
-          # Required: no
-          sdk.batch.delay: "0"
-          # Maximum size of batch before it gets read from the source.
-          # Type: int
-          # Required: no
-          sdk.batch.size: "0"
-          # Specifies whether to use a schema context name. If set to false, no
-          # schema context name will be used, and schemas will be saved with the
-          # subject name specified in the connector (not safe because of name
-          # conflicts).
-          # Type: bool
-          # Required: no
-          sdk.schema.context.enabled: "true"
-          # Schema context name to be used. Used as a prefix for all schema
-          # subject names. If empty, defaults to the connector ID.
-          # Type: string
-          # Required: no
-          sdk.schema.context.name: ""
-          # Whether to extract and encode the record key with a schema.
-          # Type: bool
-          # Required: no
-          sdk.schema.extract.key.enabled: "true"
-          # The subject of the key schema. If the record metadata contains the
-          # field "opencdc.collection" it is prepended to the subject name and
-          # separated with a dot.
-          # Type: string
-          # Required: no
-          sdk.schema.extract.key.subject: "key"
-          # Whether to extract and encode the record payload with a schema.
-          # Type: bool
-          # Required: no
-          sdk.schema.extract.payload.enabled: "true"
-          # The subject of the payload schema. If the record metadata contains
-          # the field "opencdc.collection" it is prepended to the subject name
-          # and separated with a dot.
-          # Type: string
-          # Required: no
-          sdk.schema.extract.payload.subject: "payload"
-          # The type of the payload schema.
-          # Type: string
-          # Required: no
-          sdk.schema.extract.type: "avro"
-```
-<!-- /readmegen:source.parameters.yaml -->
+The Google Drive connector is one of [Conduit](https://github.com/ConduitIO/conduit)'s plugins. It provides a **destination connector** for writing records into a specified Google Drive folder.
 
 ## Destination
 
-A destination connector pushes data from upstream resources to an external
-resource via Conduit.
+The Google Drive Destination Connector connects to a Google Drive account using a service account's credentials and uploads incoming records as files into a configured folder.
 
 ### Configuration
+
+The connector requires the following configuration parameters for authentication and folder access:
+
+- `drive.projectId`: The Google Cloud project ID.
+- `drive.privateKeyId`: The private key ID of the service account.
+- `drive.privateKey`: The private key associated with the service account.
+- `drive.clientEmail`: The client email of the service account.
+- `drive.clientId`: The client ID of the service account.
+- `drive.clientCertUrl`: The client certificate URL.
+- `drive.folderId`: The ID of the target Google Drive folder where files will be uploaded.
+
+All fields are required. If the credentials are invalid or the specified folder is inaccessible, the connector will fail to initialize.
+
+### Authentication
+
+This connector uses a **Google service account** for authentication. Ensure that the service account has write access to the target Drive folder by either:
+
+- Sharing the folder directly with the service account email, or  
+- Using domain-wide delegation (if operating within a Google Workspace organization)<!-- /readmegen:description -->
+
+
+### Example Configuration
 
 <!-- readmegen:destination.parameters.yaml -->
 ```yaml
@@ -122,31 +43,35 @@ pipelines:
       - id: example
         plugin: "google-drive"
         settings:
-          # Google Client Cert URL
+          # The URL to the X.509 certificate for the service account, used to
+          # verify its identity.
           # Type: string
           # Required: yes
           drive.clientCertUrl: ""
-          # Google Client Email
+          # The email address of the service account (e.g.
+          # my-service-account@project.iam.gserviceaccount.com).
           # Type: string
           # Required: yes
           drive.clientEmail: ""
-          # Google Client ID
+          # The OAuth2 client ID associated with the service account.
           # Type: string
           # Required: yes
           drive.clientId: ""
-          # Folder to connect to
+          # The ID of the Google Drive folder where records will be uploaded.
+          # This can be found in the folder's URL:
+          # https://drive.google.com/drive/folders/<folderId>
           # Type: string
           # Required: yes
           drive.folderId: ""
-          # Google Private Key
+          # The private key (PEM-encoded) used to sign service account requests.
           # Type: string
           # Required: yes
           drive.privateKey: ""
-          # Google Private Key ID
+          # The ID of the private key used to authenticate the service account.
           # Type: string
           # Required: yes
           drive.privateKeyId: ""
-          # Google Project ID
+          # The Google Cloud project ID associated with the service account.
           # Type: string
           # Required: yes
           drive.projectId: ""

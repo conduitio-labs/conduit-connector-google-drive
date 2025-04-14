@@ -58,7 +58,7 @@ func (d *Destination) Open(ctx context.Context) error {
 
 func (d *Destination) Write(ctx context.Context, r []opencdc.Record) (int, error) {
 	// Log the number of records
-	sdk.Logger(ctx).Info().Int("records", len(r)).Msg("Starting file uploads...")
+	sdk.Logger(ctx).Trace().Int("records", len(r)).Msg("Starting file uploads...")
 
 	// Initialize a counter to track the number of successfully uploaded records
 	successfulUploads := 0
@@ -83,7 +83,7 @@ func (d *Destination) Write(ctx context.Context, r []opencdc.Record) (int, error
 		}
 
 		// Log the uploaded file's ID
-		sdk.Logger(ctx).Info().Msgf("File uploaded successfully! File ID: %s\n", uploadedFile.Id)
+		sdk.Logger(ctx).Trace().Msgf("File uploaded successfully! File ID: %s\n", uploadedFile.Id)
 
 		// Increment the successful uploads counter
 		successfulUploads++

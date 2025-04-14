@@ -1,179 +1,58 @@
 version: "1.0"
 specification:
   name: google-drive
-  summary: A brief description of your connector.
-  description: |-
-    This is a detailed description of your connector.
-
-    It can contain information about the features and limitations of the connector, usage instructions, etc.
-
-    By default, it's inserted into the README file and Markdown syntax can be used.
+  summary: Conduit Connector for Google Drive.
+  description: "The Google Drive connector is one of [Conduit](https://github.com/ConduitIO/conduit)'s plugins. It provides a **destination connector** for writing records into a specified Google Drive folder.\n\n## Destination\n\nThe Google Drive Destination Connector connects to a Google Drive account using a service account's credentials and uploads incoming records as files into a configured folder.\n\n### Configuration\n\nThe connector requires the following configuration parameters for authentication and folder access:\n\n- `drive.projectId`: The Google Cloud project ID.\n- `drive.privateKeyId`: The private key ID of the service account.\n- `drive.privateKey`: The private key associated with the service account.\n- `drive.clientEmail`: The client email of the service account.\n- `drive.clientId`: The client ID of the service account.\n- `drive.clientCertUrl`: The client certificate URL.\n- `drive.folderId`: The ID of the target Google Drive folder where files will be uploaded.\n\nAll fields are required. If the credentials are invalid or the specified folder is inaccessible, the connector will fail to initialize.\n\n### Authentication\n\nThis connector uses a **Google service account** for authentication. Ensure that the service account has write access to the target Drive folder by either:\n\n- Sharing the folder directly with the service account email, or  \n- Using domain-wide delegation (if operating within a Google Workspace organization)"
   version: v0.0.1
-  author: Your Name
-  source:
-    parameters:
-      - name: drive.clientCertUrl
-        description: Google Client Cert URL
-        type: string
-        default: ""
-        validations:
-          - type: required
-            value: ""
-      - name: drive.clientEmail
-        description: Google Client Email
-        type: string
-        default: ""
-        validations:
-          - type: required
-            value: ""
-      - name: drive.clientId
-        description: Google Client ID
-        type: string
-        default: ""
-        validations:
-          - type: required
-            value: ""
-      - name: drive.folderId
-        description: Folder to connect to
-        type: string
-        default: ""
-        validations:
-          - type: required
-            value: ""
-      - name: drive.privateKey
-        description: Google Private Key
-        type: string
-        default: ""
-        validations:
-          - type: required
-            value: ""
-      - name: drive.privateKeyId
-        description: Google Private Key ID
-        type: string
-        default: ""
-        validations:
-          - type: required
-            value: ""
-      - name: drive.projectId
-        description: Google Project ID
-        type: string
-        default: ""
-        validations:
-          - type: required
-            value: ""
-      - name: sourceConfigParam
-        description: SourceConfigParam must be provided by the user.
-        type: string
-        default: ""
-        validations:
-          - type: required
-            value: ""
-      - name: sdk.batch.delay
-        description: Maximum delay before an incomplete batch is read from the source.
-        type: duration
-        default: "0"
-        validations: []
-      - name: sdk.batch.size
-        description: Maximum size of batch before it gets read from the source.
-        type: int
-        default: "0"
-        validations:
-          - type: greater-than
-            value: "-1"
-      - name: sdk.schema.context.enabled
-        description: |-
-          Specifies whether to use a schema context name. If set to false, no schema context name will
-          be used, and schemas will be saved with the subject name specified in the connector
-          (not safe because of name conflicts).
-        type: bool
-        default: "true"
-        validations: []
-      - name: sdk.schema.context.name
-        description: |-
-          Schema context name to be used. Used as a prefix for all schema subject names.
-          If empty, defaults to the connector ID.
-        type: string
-        default: ""
-        validations: []
-      - name: sdk.schema.extract.key.enabled
-        description: Whether to extract and encode the record key with a schema.
-        type: bool
-        default: "true"
-        validations: []
-      - name: sdk.schema.extract.key.subject
-        description: |-
-          The subject of the key schema. If the record metadata contains the field
-          "opencdc.collection" it is prepended to the subject name and separated
-          with a dot.
-        type: string
-        default: key
-        validations: []
-      - name: sdk.schema.extract.payload.enabled
-        description: Whether to extract and encode the record payload with a schema.
-        type: bool
-        default: "true"
-        validations: []
-      - name: sdk.schema.extract.payload.subject
-        description: |-
-          The subject of the payload schema. If the record metadata contains the
-          field "opencdc.collection" it is prepended to the subject name and
-          separated with a dot.
-        type: string
-        default: payload
-        validations: []
-      - name: sdk.schema.extract.type
-        description: The type of the payload schema.
-        type: string
-        default: avro
-        validations:
-          - type: inclusion
-            value: avro
+  author: Ruben Manrique
   destination:
     parameters:
       - name: drive.clientCertUrl
-        description: Google Client Cert URL
+        description: The URL to the X.509 certificate for the service account, used to verify its identity.
         type: string
         default: ""
         validations:
           - type: required
             value: ""
       - name: drive.clientEmail
-        description: Google Client Email
+        description: The email address of the service account (e.g. my-service-account@project.iam.gserviceaccount.com).
         type: string
         default: ""
         validations:
           - type: required
             value: ""
       - name: drive.clientId
-        description: Google Client ID
+        description: The OAuth2 client ID associated with the service account.
         type: string
         default: ""
         validations:
           - type: required
             value: ""
       - name: drive.folderId
-        description: Folder to connect to
+        description: |-
+          The ID of the Google Drive folder where records will be uploaded.
+          This can be found in the folder's URL: https://drive.google.com/drive/folders/<folderId>
         type: string
         default: ""
         validations:
           - type: required
             value: ""
       - name: drive.privateKey
-        description: Google Private Key
+        description: The private key (PEM-encoded) used to sign service account requests.
         type: string
         default: ""
         validations:
           - type: required
             value: ""
       - name: drive.privateKeyId
-        description: Google Private Key ID
+        description: The ID of the private key used to authenticate the service account.
         type: string
         default: ""
         validations:
           - type: required
             value: ""
       - name: drive.projectId
-        description: Google Project ID
+        description: The Google Cloud project ID associated with the service account.
         type: string
         default: ""
         validations:

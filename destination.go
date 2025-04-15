@@ -65,6 +65,12 @@ func (d *Destination) Write(ctx context.Context, r []opencdc.Record) (int, error
 
 	// Loop through each record and upload it as a separate file
 	for _, record := range r {
+		if record.Operation != opencdc.OperationCreate {
+			// Skip records that are not of type Create
+			sdk.Logger(ctx).Trace().Msgf("Skipping record with operation: %s", record.Operation)
+			successfulUploads++
+			continue
+		}
 		fileData := record.Payload.After.Bytes()
 
 		// Create a bytes buffer to hold the record data

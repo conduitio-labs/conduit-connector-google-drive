@@ -9,20 +9,6 @@ The Google Drive connector is one of [Conduit](https://github.com/ConduitIO/cond
 
 The Google Drive Destination Connector connects to a Google Drive account using a service account's credentials and uploads incoming records as files into a configured folder.
 
-### Configuration
-
-The connector requires the following configuration parameters for authentication and folder access:
-
-- `drive.projectId`: The Google Cloud project ID.
-- `drive.privateKeyId`: The private key ID of the service account.
-- `drive.privateKey`: The private key associated with the service account.
-- `drive.clientEmail`: The client email of the service account.
-- `drive.clientId`: The client ID of the service account.
-- `drive.clientCertUrl`: The client certificate URL.
-- `drive.folderId`: The ID of the target Google Drive folder where files will be uploaded.
-
-All fields are required. If the credentials are invalid or the specified folder is inaccessible, the connector will fail to initialize.
-
 ### Authentication
 
 This connector uses a **Google service account** for authentication. Ensure that the service account has write access to the target Drive folder by either:
@@ -57,12 +43,6 @@ pipelines:
           # Type: string
           # Required: yes
           drive.clientId: ""
-          # The ID of the Google Drive folder where records will be uploaded.
-          # This can be found in the folder's URL:
-          # https://drive.google.com/drive/folders/<folderId>
-          # Type: string
-          # Required: yes
-          drive.folderId: ""
           # The private key (PEM-encoded) used to sign service account requests.
           # Type: string
           # Required: yes
@@ -75,6 +55,12 @@ pipelines:
           # Type: string
           # Required: yes
           drive.projectId: ""
+          # The ID of the Google Drive folder where records will be uploaded.
+          # This can be found in the folder's URL:
+          # https://drive.google.com/drive/folders/<folderId>
+          # Type: string
+          # Required: yes
+          folderId: ""
           # Maximum delay before an incomplete batch is written to the
           # destination.
           # Type: duration
@@ -130,14 +116,6 @@ pipelines:
 
 Run `make build` to build the connector.
 
-## Testing
-
-Run `make test` to run all the unit tests. Run `make test-integration` to run
-the integration tests.
-
-The Docker compose file at `test/docker-compose.yml` can be used to run the
-required resource locally.
-
 ## How to release?
 
 The release is done in two steps:
@@ -149,13 +127,3 @@ The release is done in two steps:
   change.
 - Tag the connector, which will kick off a release. This can be done
   with [tag.sh](/scripts/tag.sh).
-
-## Known Issues & Limitations
-
-- Known issue A
-- Limitation A
-
-## Planned work
-
-- [ ] Item A
-- [ ] Item B

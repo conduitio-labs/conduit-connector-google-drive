@@ -2,7 +2,7 @@ version: "1.0"
 specification:
   name: google-drive
   summary: Conduit Connector for Google Drive.
-  description: "The Google Drive connector is one of [Conduit](https://github.com/ConduitIO/conduit)'s plugins. It provides a **destination connector** for writing records into a specified Google Drive folder.\n\n## Destination\n\nThe Google Drive Destination Connector connects to a Google Drive account using a service account's credentials and uploads incoming records as files into a configured folder.\n\n### Configuration\n\nThe connector requires the following configuration parameters for authentication and folder access:\n\n- `drive.projectId`: The Google Cloud project ID.\n- `drive.privateKeyId`: The private key ID of the service account.\n- `drive.privateKey`: The private key associated with the service account.\n- `drive.clientEmail`: The client email of the service account.\n- `drive.clientId`: The client ID of the service account.\n- `drive.clientCertUrl`: The client certificate URL.\n- `drive.folderId`: The ID of the target Google Drive folder where files will be uploaded.\n\nAll fields are required. If the credentials are invalid or the specified folder is inaccessible, the connector will fail to initialize.\n\n### Authentication\n\nThis connector uses a **Google service account** for authentication. Ensure that the service account has write access to the target Drive folder by either:\n\n- Sharing the folder directly with the service account email, or  \n- Using domain-wide delegation (if operating within a Google Workspace organization)"
+  description: "The Google Drive connector is one of [Conduit](https://github.com/ConduitIO/conduit)'s plugins. It provides a **destination connector** for writing records into a specified Google Drive folder.\n\n## Destination\n\nThe Google Drive Destination Connector connects to a Google Drive account using a service account's credentials and uploads incoming records as files into a configured folder.\n\n### Authentication\n\nThis connector uses a **Google service account** for authentication. Ensure that the service account has write access to the target Drive folder by either:\n\n- Sharing the folder directly with the service account email, or  \n- Using domain-wide delegation (if operating within a Google Workspace organization)"
   version: v0.0.1
   author: Meroxa, Inc.
   destination:
@@ -28,15 +28,6 @@ specification:
         validations:
           - type: required
             value: ""
-      - name: drive.folderId
-        description: |-
-          The ID of the Google Drive folder where records will be uploaded.
-          This can be found in the folder's URL: https://drive.google.com/drive/folders/<folderId>
-        type: string
-        default: ""
-        validations:
-          - type: required
-            value: ""
       - name: drive.privateKey
         description: The private key (PEM-encoded) used to sign service account requests.
         type: string
@@ -53,6 +44,15 @@ specification:
             value: ""
       - name: drive.projectId
         description: The Google Cloud project ID associated with the service account.
+        type: string
+        default: ""
+        validations:
+          - type: required
+            value: ""
+      - name: folderId
+        description: |-
+          The ID of the Google Drive folder where records will be uploaded.
+          This can be found in the folder's URL: https://drive.google.com/drive/folders/<folderId>
         type: string
         default: ""
         validations:

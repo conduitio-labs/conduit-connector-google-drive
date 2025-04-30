@@ -29,7 +29,7 @@ type Config struct {
 
 	// The ID of the Google Drive folder where records will be uploaded.
 	// This can be found in the folder's URL: https://drive.google.com/drive/folders/<folderId>
-	DriveFolderID string `json:"drive.folderId" validate:"required"`
+	FolderID string `json:"folderId" validate:"required"`
 }
 
 func (c *Config) BuildCredentials() ([]byte, error) {

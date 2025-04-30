@@ -79,7 +79,7 @@ func (d *Destination) Write(ctx context.Context, r []opencdc.Record) (int, error
 		// Prepare the file metadata (include the folder ID in the Parents field)
 		fileMetadata := &drive.File{
 			Name:    fmt.Sprintf("%s.txt", record.Key.Bytes()), // Set the file name
-			Parents: []string{d.config.DriveFolderID},          // Set the shared folder ID
+			Parents: []string{d.config.FolderID},               // Set the shared folder ID
 		}
 
 		// Upload the file directly from the bytes buffer

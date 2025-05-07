@@ -2,7 +2,19 @@ version: "1.0"
 specification:
   name: google-drive
   summary: Conduit Connector for Google Drive.
-  description: "The Google Drive connector is one of [Conduit](https://github.com/ConduitIO/conduit)'s plugins. It provides a **destination connector** for writing records into a specified Google Drive folder.\n\n## Destination\n\nThe Google Drive Destination Connector connects to a Google Drive account using a service account's credentials and uploads incoming records as files into a configured folder.\n\n### Authentication\n\nThis connector uses a **Google service account** for authentication. Ensure that the service account has write access to the target Drive folder by either:\n\n- Sharing the folder directly with the service account email, or  \n- Using domain-wide delegation (if operating within a Google Workspace organization)"
+  description: |-
+    The Google Drive connector is one of [Conduit](https://github.com/ConduitIO/conduit)'s plugins. It provides a **destination connector** for writing records into a specified Google Drive folder.
+
+    ## Destination
+
+    The Google Drive Destination Connector connects to a Google Drive account using a service account's credentials and uploads incoming records as files into a configured folder.
+
+    ### Authentication
+
+    This connector uses a **Google service account** for authentication. Ensure that the service account has write access to the target Drive folder by either:
+
+    - Sharing the folder directly with the service account email, or
+    - Using domain-wide delegation (if operating within a Google Workspace organization)"
   version: v0.0.1
   author: Meroxa, Inc.
   destination:

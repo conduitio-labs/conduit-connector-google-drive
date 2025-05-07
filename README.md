@@ -13,11 +13,11 @@ The Google Drive Destination Connector connects to a Google Drive account using 
 
 This connector uses a **Google service account** for authentication. Ensure that the service account has write access to the target Drive folder by either:
 
-- Sharing the folder directly with the service account email, or  
-- Using domain-wide delegation (if operating within a Google Workspace organization)<!-- /readmegen:description -->
+- Sharing the folder directly with the service account email, or
+- Using domain-wide delegation (if operating within a Google Workspace organization)"<!-- /readmegen:description -->
 
 
-### Example Configuration
+### Destination Configuration
 
 <!-- readmegen:destination.parameters.yaml -->
 ```yaml

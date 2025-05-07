@@ -65,11 +65,9 @@ func (d *Destination) Write(ctx context.Context, r []opencdc.Record) (int, error
 
 	// Loop through each record and upload it as a separate file
 	for _, record := range r {
-		if record.Operation != opencdc.OperationCreate {
+		if record.Operation != opencdc.OperationCreate && record.Operation != opencdc.OperationSnapshot {
 			// Skip records that are not of type Create
-			sdk.Logger(ctx).Trace().Msgf("Skipping record with operation: %s", record.Operation)
-			successfulUploads++
-			continue
+			return successfulUploads, fmt.Errorf("unsupported operation: %s", record.Operation)
 		}
 		fileData := record.Payload.After.Bytes()
 

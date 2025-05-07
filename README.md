@@ -9,6 +9,8 @@ The Google Drive connector is one of [Conduit](https://github.com/ConduitIO/cond
 
 The Google Drive Destination Connector connects to a Google Drive account using a service account's credentials and uploads incoming records as files into a configured folder.
 
+Note: The destination conneector only supports the create and snapshot operations. It does not support the delete or update operation.
+
 ### Authentication
 
 This connector uses a **Google service account** for authentication. Ensure that the service account has write access to the target Drive folder by either:

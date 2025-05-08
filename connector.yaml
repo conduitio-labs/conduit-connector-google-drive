@@ -9,7 +9,7 @@ specification:
 
     The Google Drive Destination Connector connects to a Google Drive account using a service account's credentials and uploads incoming records as files into a configured folder.
 
-    Note: The destination conneector only supports the create and snapshot operations. It does not support the delete or update operation.
+    Note: The destination connector only supports the `create` and `snapshot` operations. It does not support the `delete` or `update` operations.
 
     ### Authentication
 

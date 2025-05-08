@@ -118,14 +118,3 @@ pipelines:
 
 Run `make build` to build the connector.
 
-## How to release?
-
-The release is done in two steps:
-
-- Bump the version in [connector.yaml](/connector.yaml). This can be done
-  with [bump_version.sh](/scripts/bump_version.sh) script, e.g.
-  `scripts/bump_version.sh 2.3.4` (`2.3.4` is the new version and needs to be a
-  valid semantic version). This will also automatically create a PR for the
-  change.
-- Tag the connector, which will kick off a release. This can be done
-  with [tag.sh](/scripts/tag.sh).

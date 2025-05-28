@@ -6,7 +6,7 @@ require (
 	github.com/conduitio/conduit-commons v0.5.4
 	github.com/conduitio/conduit-connector-sdk v0.13.4
 	github.com/matryer/is v1.4.1
-	google.golang.org/api v0.234.0
+	google.golang.org/api v0.235.0
 )
 
 require (

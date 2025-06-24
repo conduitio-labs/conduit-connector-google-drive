@@ -1,8 +1,8 @@
 package main
 
 import (
+	googledrive "github.com/conduitio-labs/conduit-connector-google-drive"
 	sdk "github.com/conduitio/conduit-connector-sdk"
-	googledrive "github.com/repository/conduit-connector-google-drive"
 )
 
 func main() {

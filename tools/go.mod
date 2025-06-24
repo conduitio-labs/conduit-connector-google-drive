@@ -1,4 +1,4 @@
-module github.com/repository/conduit-connector-google-drive/tools
+module github.com/conduitio-labs/conduit-connector-google-drive/tools
 
 go 1.24.2
 

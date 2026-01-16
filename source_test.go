@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
+	googledrive "github.com/conduitio-labs/conduit-connector-google-drive"
 	"github.com/matryer/is"
-	googledrive "github.com/repository/conduit-connector-google-drive"
 )
 
 func TestTeardownSource_NoOpen(t *testing.T) {
